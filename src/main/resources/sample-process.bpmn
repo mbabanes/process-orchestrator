@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_11cdln3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.46.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.24.0">
+  <bpmn:process id="process-1" name="Process" isExecutable="true" camunda:historyTimeToLive="10">
+    <bpmn:startEvent id="StartEvent_1" name="Start Process">
+      <bpmn:outgoing>Flow_1jcesp7</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1jcesp7" sourceRef="StartEvent_1" targetRef="create-form" />
+    <bpmn:endEvent id="end-process" name="End Process">
+      <bpmn:extensionElements>
+        <camunda:executionListener class="org.process.processorchestratormvn.process.FinishingTaskListener" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0ym8zky</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0ym8zky" sourceRef="basic-data-retriving" targetRef="end-process" />
+    <bpmn:receiveTask id="basic-data-retriving" name="Basic Data Retriving" messageRef="Message_11ku5gl">
+      <bpmn:incoming>Flow_1gn92iy</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ym8zky</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:sequenceFlow id="Flow_1gn92iy" sourceRef="create-form" targetRef="basic-data-retriving" />
+    <bpmn:serviceTask id="create-form" name="Create form" camunda:class="org.process.processorchestratormvn.process.CreateFormDelegate">
+      <bpmn:incoming>Flow_1jcesp7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1gn92iy</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmn:message id="Message_11ku5gl" name="FORM_COMPLETED" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="process-1">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="167" y="145" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_11cok6j_di" bpmnElement="basic-data-retriving">
+        <dc:Bounds x="520" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0pmi3lv_di" bpmnElement="create-form">
+        <dc:Bounds x="310" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0o8mu4z_di" bpmnElement="end-process">
+        <dc:Bounds x="732" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="719" y="145" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1jcesp7_di" bpmnElement="Flow_1jcesp7">
+        <di:waypoint x="218" y="120" />
+        <di:waypoint x="310" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ym8zky_di" bpmnElement="Flow_0ym8zky">
+        <di:waypoint x="620" y="120" />
+        <di:waypoint x="732" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gn92iy_di" bpmnElement="Flow_1gn92iy">
+        <di:waypoint x="410" y="120" />
+        <di:waypoint x="520" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
