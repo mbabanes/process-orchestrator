@@ -10,4 +10,13 @@ Klasa `CreateFormDelegate` zapisuje do `eximee` info że zostaje uruchomiony for
 
 Klasa `FinishingTaskListener` jest wpięta jako listner pod skończenie procesu.
 
-W klasie `StartProcessController` znajduje się jeszce endpoint do zebrania informacji że zebranie danych z formularza się powiodło.
+W klasie `StartProcessController` znajduje się jeszce endpoint do zebrania informacji że zebranie danych z formularza się powiodło:
+
+`POST http://localhost:8070/form-result`
+
+```json
+{
+   "processInstanceId": "df4a4e88-50fe-11f1-a789-00155dad84bc",
+   "approved": true
+}
+```
