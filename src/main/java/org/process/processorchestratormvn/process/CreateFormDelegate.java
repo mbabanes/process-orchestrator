@@ -16,7 +16,7 @@ import java.util.Map;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CreateFormDelegate implements JavaDelegate {
+class CreateFormDelegate implements JavaDelegate {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
@@ -25,7 +25,7 @@ public class CreateFormDelegate implements JavaDelegate {
     public void execute(DelegateExecution execution) {
         String processInstanceId =
                 execution.getProcessInstanceId();
-        log.info("Prepering company data form for {}", processInstanceId);
+        log.info("Preparing company data form for {}", processInstanceId);
         String formUrl =
                 "http://localhost:8080/company-data-form/"
                         + processInstanceId;
