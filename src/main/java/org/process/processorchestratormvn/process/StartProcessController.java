@@ -27,7 +27,7 @@ class StartProcessController {
     }
 
 
-    record FormResultDto(String processInstanceId, boolean approved) {
+    record FormResultDto(String processInstanceId, boolean rejected) {
     }
 
     @PostMapping("/form-result")
@@ -36,7 +36,7 @@ class StartProcessController {
         log.info("Getting company-data form result for {}", body.processInstanceId());
         runtimeService.createMessageCorrelation("FORM_COMPLETED")
                 .processInstanceId(body.processInstanceId())
-                .setVariable("approved", body.approved())
+                .setVariable("rejected", body.rejected())
                 .correlate();
     }
 }
